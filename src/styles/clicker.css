@@ -1,0 +1,274 @@
+.tagline {
+  text-align: center;
+  font-weight: 600 !important;
+}
+
+.clicker button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  height: 45px;
+  border-radius: var(--border-radius-small);
+}
+
+.clicker-button__square {
+  height: 45px !important;
+  aspect-ratio: 1 / 1;
+}
+
+.clicker-button__square svg {
+  width: 20px;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+/* Home */
+
+.clicker-level {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--gap-big);
+}
+
+.clicker-level__left {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--gap-small);
+}
+
+.clicker-level__progrssbar {
+  height: 10px;
+  width: 100%;
+  border-radius: var(--border-radius-small);
+  border: var(--border-solid-accent);
+  background-color: white;
+}
+
+.clicker-level__progrssbar_fill {
+  height: 100%;
+  width: 30%;
+  background-color: #eb6608;
+  border-radius: var(--border-radius-small);
+}
+
+.clicker-level__rank {
+  display: flex;
+  gap: var(--gap-small);
+  justify-content: space-between;
+}
+
+.clicker-level__energy p {
+  font-size: 14px;
+}
+
+.clicker-level__energy {
+  width: 105px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  padding: var(--padding-small);
+  gap: calc(var(--gap-small) / 2);
+  height: min-content;
+  white-space: nowrap;
+  background-color: #51ad32;
+  border-radius: var(--border-radius-small);
+  color: white;
+}
+
+.clicker-level__energy p {
+  font-size: 14px;
+}
+
+.clicker-icon {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  transition: 0.01s ease-in-out transform;
+  user-select: none;
+}
+
+.clicker-icon svg:active {
+  transform: scale(0.97);
+}
+
+.clicker-icon svg {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+.clicker-navbar {
+  max-width: 500px;
+  width: 100%;
+
+  height: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: fixed;
+  bottom: var(--padding-big);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--gap-big);
+  padding: var(--padding-small) var(--padding-big);
+}
+
+.nav-clicker-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--main-color);
+}
+
+.nav-clicker-link p {
+  font-size: 14px;
+}
+
+.nav-clicker-link svg {
+  width: 30px;
+  aspect-ratio: 1 / 1;
+}
+
+.nav-clicker-link.active {
+  border-bottom: 2px solid var(--main-color);
+}
+
+.fade-in {
+  z-index: 2;
+  position: absolute;
+  color: white;
+  font-size: 32px;
+  opacity: 0;
+  animation: fadeInScale 0.5s ease-in-out;
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8); /* Начальный размер */
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05); /* Увеличение до 105% */
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8); /* Конечный размер */
+  }
+}
+
+/* Tasks */
+
+.cliker-tasks {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: var(--gap-small);
+}
+
+.cliker-tasks__item {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-small);
+  cursor: pointer;
+}
+
+.cliker-tasks__item_inactive {
+  background-color: #658cb5;
+  color: white;
+}
+
+.cliker-tasks__item svg {
+  width: 50px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+.cliker-tasks__item-icon {
+  display: flex;
+  align-items: center;
+}
+
+.cliker-tasks__item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/*  */
+
+/* Friends */
+
+.clicker-friends {
+  display: flex;
+  gap: var(--gap-small);
+}
+
+.clicker-friends h2 {
+  color: black;
+}
+
+.clicker-friends svg {
+  width: 85px;
+  height: auto;
+}
+
+.clicker-friends__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
+
+.clicker-friends__buttons {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr auto;
+  gap: var(--gap-small);
+  justify-self: end;
+}
+
+.clicker-friends__buttons button {
+  text-align: center;
+  color: white;
+  width: 100%;
+  background-color: var(--green-color);
+}
+
+/*  */
+
+/* Profile */
+
+.clicker-statistic {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap-big);
+}
+
+.clicker-statistic .clicker-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.clicker-statistic__title {
+  text-align: center;
+  font-size: 20px;
+}
+
+.clicker-statistic__text {
+  text-align: center;
+  font-size: 32px;
+}
+
+.clicker-profile__button {
+  background-color: var(--green-color);
+  color: white;
+}
+/*  */

@@ -1,0 +1,16 @@
+:root {
+    --padding-big: 20px;
+    --padding-small: 10px;
+  
+    --gap-big: 30px;
+    --gap-small: 10px;
+  
+    --component-color: #bdc9da;
+    --main-color: #292f69;
+    --green-color: #51ad32;
+  
+    --border-radius-small: 10px;
+    --border-solid-main: 1px solid white;
+  
+    --border-solid-accent: 1px solid #eb6608;
+  }
