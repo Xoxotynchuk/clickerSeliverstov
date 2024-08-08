@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/clickerSeliverstov/static/css/main.dc9c443a.css",
-    "main.js": "/clickerSeliverstov/static/js/main.e24f5fbf.js",
+    "main.css": "/clickerSeliverstov/static/css/main.a59f08d0.css",
+    "main.js": "/clickerSeliverstov/static/js/main.4c1de095.js",
     "static/js/453.ed3810f9.chunk.js": "/clickerSeliverstov/static/js/453.ed3810f9.chunk.js",
     "static/media/Raleway-SemiBold.ttf": "/clickerSeliverstov/static/media/Raleway-SemiBold.bd43d9472ee0c9fbe785.ttf",
     "static/media/Raleway-Medium.ttf": "/clickerSeliverstov/static/media/Raleway-Medium.0de5925709848b7e64c5.ttf",
     "static/media/Raleway-Regular.ttf": "/clickerSeliverstov/static/media/Raleway-Regular.d9219d8a361ac3530c7e.ttf",
     "static/media/Raleway-Bold.ttf": "/clickerSeliverstov/static/media/Raleway-Bold.8e546283422c830c02dc.ttf",
     "index.html": "/clickerSeliverstov/index.html",
-    "main.dc9c443a.css.map": "/clickerSeliverstov/static/css/main.dc9c443a.css.map",
-    "main.e24f5fbf.js.map": "/clickerSeliverstov/static/js/main.e24f5fbf.js.map",
+    "main.a59f08d0.css.map": "/clickerSeliverstov/static/css/main.a59f08d0.css.map",
+    "main.4c1de095.js.map": "/clickerSeliverstov/static/js/main.4c1de095.js.map",
     "453.ed3810f9.chunk.js.map": "/clickerSeliverstov/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dc9c443a.css",
-    "static/js/main.e24f5fbf.js"
+    "static/css/main.a59f08d0.css",
+    "static/js/main.4c1de095.js"
   ]
 }
