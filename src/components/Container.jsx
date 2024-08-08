@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 
 import Clicker from "./screens/clicker";
 import ClickerTasks from "./screens/clickerTasks";
@@ -9,14 +9,14 @@ const Container = () => {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Clicker />} />
           <Route path="/tasks" element={<ClickerTasks />} />
           <Route path="/friends" element={<ClickerFriends />} />
           <Route path="/account" element={<ClickerAccount />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 };

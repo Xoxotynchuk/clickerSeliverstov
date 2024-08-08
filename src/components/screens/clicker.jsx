@@ -65,8 +65,10 @@ function Clicker() {
             <p>{energy} / 500</p>
           </div>
         </div>
-        <h1 className="number-votes">{vote} голосов</h1>
-        <h2 className="tagline">СЛЫШАТЬ. ПОМОГАТЬ. РЕШАТЬ.</h2>
+        <div className="taglines">
+          <h1 className="number-votes">{vote} голосов</h1>
+          <h2 className="tagline">СЛЫШАТЬ. ПОМОГАТЬ. РЕШАТЬ.</h2>
+        </div>
         <div
           className="clicker-icon"
           onClick={handleClick}
