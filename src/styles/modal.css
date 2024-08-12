@@ -1,0 +1,49 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  padding: var(--padding-big);
+  overflow: auto;
+}
+
+.modal {
+  position: relative;
+  background: white;
+  padding: var(--padding-small);
+  border-radius: var(--border-radius-small);
+  width: 100%;
+  height: fit-content;
+  max-width: 500px;
+  overflow: auto;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  gap: var(--gap-big);
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.modal-label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+}
+
+.modal-label input {
+  width: 100%;
+}

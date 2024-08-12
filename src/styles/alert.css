@@ -1,0 +1,34 @@
+.alert {
+  position: fixed;
+  left: 50%;
+  top: -150px;
+  
+  transform: translateX(-50%);
+  
+  width: 100%;
+  max-width: max-content;
+
+  border: var(--border-solid-accent);
+  border-radius: var(--border-radius-small);
+
+  padding: var(--padding-big);
+  background-color: white;
+  
+  transition: .4s ease-in-out top;
+  z-index: 9;
+}
+
+.alert_active {
+  top: 20px;
+}
+
+.alert-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-small);
+}
+
+.alert-content h2 {
+  color: black;
+}

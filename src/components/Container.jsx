@@ -1,22 +1,31 @@
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Clicker from "./screens/clicker";
-import ClickerTasks from "./screens/clickerTasks";
-import ClickerFriends from "./screens/clickerFriends";
-import ClickerAccount from "./screens/clickerAccount";
+import Modal from "./modals/Modal";
+import { useContext } from "react";
+
+import { GlobalContext } from "./store/GlobalContext";
+import Alert from "./alerts/Alert";
 
 const Container = () => {
+  const { isModalOpen, modalContent, isAlertOpen, alertContent } = useContext(GlobalContext);
 
   return (
     <div className="App">
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Clicker />} />
-          <Route path="/tasks" element={<ClickerTasks />} />
-          <Route path="/friends" element={<ClickerFriends />} />
-          <Route path="/account" element={<ClickerAccount />} />
         </Routes>
-      </HashRouter>
+
+        <Modal
+          isOpen={isModalOpen}
+          content={modalContent}
+        />
+        <Alert
+          isOpen={isAlertOpen}
+          content={alertContent}
+        />
+      </BrowserRouter>
     </div>
   );
 };
