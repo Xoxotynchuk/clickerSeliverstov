@@ -1,0 +1,12 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-big);
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.login label {
+    color: white;
+}

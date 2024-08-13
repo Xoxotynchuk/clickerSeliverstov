@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GlobalContext } from "../store/GlobalContext";
+import { Api } from "../../methods/requests/Api";
 
 function Clicker() {
   const {
@@ -15,13 +16,27 @@ function Clicker() {
     setAllTasks,
   } = useContext(GlobalContext);
 
-  const getAllUsers = async () => {};
+  const getStatistic = async () => {
+    try {
+      const response = await Api.getStatistic();
+      setAllUsers(response.data.data.users)
+      setAverageVote(response.data.data.avg_votes)
+      setTapToday(response.data.data.records)
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  const getAverageVote = async () => {};
-
-  const getTapToday = async () => {};
-
-  const getAllTasks = async () => {};
+  const getAllTasks = async () => {
+    try {
+      const response = await Api.getAllTasks();
+      setAllTasks(response.data.data)
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const openModal = (content) => {
     setModalContent(content);
@@ -31,6 +46,10 @@ function Clicker() {
   const deleteTask = async () => {
     console.log("Удаление задачи");
   };
+
+  useEffect(() => {
+    getStatistic();
+  });
 
   return (
     <div className="clicker">

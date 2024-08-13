@@ -4,6 +4,7 @@
   box-sizing: border-box;
   font-family: Raleway;
   font-size: 16px;
+  font-variant-numeric: lining-nums;
 }
 
 @font-face {
@@ -51,6 +52,16 @@ body {
 
 a {
   text-decoration: none;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+}
+
+label input {
+  width: 100%;
 }
 
 input {

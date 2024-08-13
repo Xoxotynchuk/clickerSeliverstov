@@ -6,25 +6,31 @@ import { useContext } from "react";
 
 import { GlobalContext } from "./store/GlobalContext";
 import Alert from "./alerts/Alert";
+import Login from "./screens/login";
+import PageNotFound from "./screens/PageNotFound";
 
 const Container = () => {
-  const { isModalOpen, modalContent, isAlertOpen, alertContent } = useContext(GlobalContext);
+  const { isModalOpen, modalContent, isAlertOpen, alertContent, status } =
+    useContext(GlobalContext);
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Clicker />} />
-        </Routes>
+        {status && status === 500 && (
+          <Routes>
+            <Route path="*" element={<PageNotFound />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        )}
+        {status && status !== 500 && (
+          <Routes>
+            <Route path="/" element={<Clicker />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        )}
 
-        <Modal
-          isOpen={isModalOpen}
-          content={modalContent}
-        />
-        <Alert
-          isOpen={isAlertOpen}
-          content={alertContent}
-        />
+        <Modal isOpen={isModalOpen} content={modalContent} />
+        <Alert isOpen={isAlertOpen} content={alertContent} />
       </BrowserRouter>
     </div>
   );

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import checkAuth from "../../methods/requests/checkAuth";
 const GlobalContext = React.createContext();
 
 const GlobalProvider = ({ children }) => {
@@ -14,6 +15,18 @@ const GlobalProvider = ({ children }) => {
 
   const [allTasks, setAllTasks] = useState({});
 
+  const [status, setStatus] = useState("");
+  const [data, setData] = useState("");
+
+
+
+  const getAccess = async () => {
+    const authStatus = await checkAuth(setStatus, setData);
+  };
+
+  useEffect(() => {
+    getAccess();
+  }, []);
 
   return <GlobalContext.Provider value={{
     isModalOpen, setIsModalOpen,
@@ -27,6 +40,9 @@ const GlobalProvider = ({ children }) => {
     tapToday, setTapToday,
 
     allTasks, setAllTasks,
+
+    status, setStatus,
+    data, setData
   }}>
       {children}
     </GlobalContext.Provider>;

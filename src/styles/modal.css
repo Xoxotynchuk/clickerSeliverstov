@@ -37,13 +37,3 @@
   right: 10px;
   cursor: pointer;
 }
-
-.modal-label {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-small);
-}
-
-.modal-label input {
-  width: 100%;
-}
