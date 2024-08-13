@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { GlobalContext } from "../store/GlobalContext";
 
 const Modal = ({ isOpen, content }) => {
-  const { setIsModalOpen, setModalContent, setAlertContent, setIsAlertOpen } = useContext(GlobalContext);
+  const { setIsModalOpen, setModalContent, modalData, setAlertContent, setIsAlertOpen } = useContext(GlobalContext);
 
   if (!isOpen) return null;
 
@@ -63,6 +63,21 @@ const Modal = ({ isOpen, content }) => {
                 <input name="image" type="file" required />
               </label>
 
+              <label htmlFor="active" className="modal-label">
+                <h3>Активность</h3>
+                <input name="active" type="checkbox" checked />
+              </label>
+
+              <label htmlFor="count" className="modal-label">
+                <h3>Намбер</h3>
+                <input name="count" type="number" defaultValue='1' checked />
+              </label>
+
+              <label htmlFor="text" className="modal-label">
+                <h3>Ссылка</h3>
+                <input name="text" type="text" checked />
+              </label>
+
               <label htmlFor="description" className="modal-label">
                 <h3>Описание</h3>
                 <input name="description" type="text" required />
@@ -91,7 +106,7 @@ const Modal = ({ isOpen, content }) => {
             <div className="form-content">
               <label htmlFor="title" className="modal-label">
                 <h3>Название</h3>
-                <input name="title" type="text" required />
+                <input name="title" type="text" defaultValue={modalData.item.name} required />
               </label>
 
               <label htmlFor="image" className="modal-label">
@@ -99,14 +114,29 @@ const Modal = ({ isOpen, content }) => {
                 <input name="image" type="file" required />
               </label>
 
+              <label htmlFor="active" className="modal-label">
+                <h3>Активность</h3>
+                <input name="active" type="checkbox" checked />
+              </label>
+
+              <label htmlFor="count" className="modal-label">
+                <h3>Намбер</h3>
+                <input name="count" type="number" defaultValue='1' checked />
+              </label>
+
+              <label htmlFor="text" className="modal-label">
+                <h3>Ссылка</h3>
+                <input name="text" type="text" checked />
+              </label>
+
               <label htmlFor="description" className="modal-label">
                 <h3>Описание</h3>
-                <input name="description" type="text" required />
+                <input name="description" type="text" defaultValue={modalData.item.description} required />
               </label>
 
               <label htmlFor="price" className="modal-label">
                 <h3>Цена</h3>
-                <input name="price" type="text" required />
+                <input name="price" type="text" defaultValue={modalData.item.price} required />
               </label>
 
               <label htmlFor="category" className="modal-label">

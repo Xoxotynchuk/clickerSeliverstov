@@ -7,7 +7,7 @@ function Login() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  const { status } = useContext(GlobalContext);
+  const { status,setStatus } = useContext(GlobalContext);
 
   const loginHandler = (event) => {
     setLogin(event.target.value);
@@ -21,25 +21,17 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await loginRequest(login, password);     
+      const response = await loginRequest(login, password);  
+      setStatus(response.data.data.status)
       document.cookie =
         "currentToken=" + response.data.data + "; max-age=15638400";
       localStorage.setItem(login, response.data.data);
-      // window.location.reload();
+      window.location.reload();
     } catch (err) {
       if (err.response.status === 403) {
         // setAlert(true);
         // setAlertBorder('negative');
         // setAlertName("Неверный пароль");
-      } else if (err.response.status === 400) {
-        const auth = document.getElementById("login");
-        auth.classList.add("hidden");
-        const confirm = document.getElementById("confirm");
-        confirm.classList.remove("hidden");
-      } else {
-        // setAlert(true);
-        // setAlertBorder('negative');
-        // setAlertName("Проблемы с сервером");
       }
     }
   };

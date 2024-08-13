@@ -1,17 +1,11 @@
-import { Api } from "./Api"
+import { getCookie } from "../getCookie";
 
-const checkAuth = async (setStatus, setData) => {
-    try {
-        const response = await Api.checkAuth()
-        console.log(response);
-        
-        setData(response.data.data)
-        setStatus(response.status)
-        return response.status
-    } catch (error) {
-        setStatus(error.response.status)
-        return error.response.status
-    }
-}
+const checkAuth = async (setStatus) => {
+  if (getCookie("currentToken")) {
+    setStatus(200);
+  } else {
+    setStatus(0);
+  }
+};
 
-export default checkAuth
+export default checkAuth;

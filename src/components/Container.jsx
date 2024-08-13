@@ -12,20 +12,20 @@ import PageNotFound from "./screens/PageNotFound";
 const Container = () => {
   const { isModalOpen, modalContent, isAlertOpen, alertContent, status } =
     useContext(GlobalContext);
-
+    
   return (
     <div className="App">
       <BrowserRouter>
-        {status && status === 500 && (
-          <Routes>
-            <Route path="*" element={<PageNotFound />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        )}
-        {status && status !== 500 && (
+        {status && status == 200 ? (
           <Routes>
             <Route path="/" element={<Clicker />} />
             <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="*" element={<PageNotFound />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
           </Routes>
         )}
 

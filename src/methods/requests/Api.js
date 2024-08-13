@@ -15,12 +15,6 @@ export class Api {
     return "https://api.seliverstov-mgd.ru/api/" + route;
   }
 
-  // Проверка авторизаци
-  static async checkAuth() {
-    const response = await axios.get(this.baseUrl("auth"), this.auth());
-    return response;
-  }
-
   // Получить статистику
   static async getStatistic() {
     const response = await axios.get(this.baseUrl("statistics"), this.auth());
