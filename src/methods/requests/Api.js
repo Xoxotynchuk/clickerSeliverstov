@@ -28,32 +28,75 @@ export class Api {
   }
 
   // Создать задание
-  static async createTasks() {
-    const response = await axios.post(this.baseUrl("admin/tasks"), this.auth());
+  static async createTasks(data) {
+    // Создаем объект FormData
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("task_type_id", data.category);
+    formData.append("image", data.image); // Здесь передаем файл
+    formData.append("price", data.price);
+    formData.append("link", data.link);
+    formData.append("description", data.description);
+    formData.append("count", data.count);
+    formData.append("active", data.active);
+
+    const response = await axios.post(
+      this.baseUrl("admin/tasks"),
+      formData,
+      this.auth()
+    );
+
     return response;
   }
 
   // Редактировать задание
-  static async editTasks(id) {
-    const response = await axios.patch(this.baseUrl("admin/tasks/" + id), this.auth());
+  static async editTasks(id, data) {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("task_type_id", data.category);
+    if (data.image) {
+      formData.append("image", data.image)
+    };
+    formData.append("price", data.price);
+    formData.append("link", data.link);
+    formData.append("description", data.description);
+    formData.append("count", data.count);
+    formData.append("active", data.active);
+
+    console.log(data);
+    
+    const response = await axios.post(
+      this.baseUrl("admin/tasks/" + id),
+      formData,
+      this.auth()
+    );
     return response;
   }
 
   // Удалить задание
   static async deleteTasks(id) {
-    const response = await axios.delete(this.baseUrl("admin/tasks/" + id), this.auth());
+    const response = await axios.get(
+      this.baseUrl("admin/tasks/" + id),
+      this.auth()
+    );
     return response;
   }
 
   // Активировать задание
   static async setTaskActive(id) {
-    const response = await axios.get(this.baseUrl("admin/tasks/active/" + id), this.auth());
+    const response = await axios.get(
+      this.baseUrl("admin/tasks/active/" + id),
+      this.auth()
+    );
     return response;
   }
 
   // Деактивировать задание
   static async setTaskActive(id) {
-    const response = await axios.get(this.baseUrl("admin/tasks/deactive/" + id), this.auth());
+    const response = await axios.get(
+      this.baseUrl("admin/tasks/deactive/" + id),
+      this.auth()
+    );
     return response;
   }
 }

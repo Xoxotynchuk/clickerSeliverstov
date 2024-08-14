@@ -1,7 +1,7 @@
 .alert {
   position: fixed;
   left: 50%;
-  top: -150px;
+  top: -250px;
   
   transform: translateX(-50%);
   
@@ -23,6 +23,7 @@
 }
 
 .alert-content {
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,4 +32,14 @@
 
 .alert-content h2 {
   color: black;
+}
+
+.alert-buttons {
+  width: 100%;
+  display: flex;
+  gap: var(--gap-small);
+}
+
+.alert-buttons button {
+  width: 100%;
 }

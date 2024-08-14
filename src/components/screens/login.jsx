@@ -35,8 +35,7 @@ function Login() {
       }
     }
   };
-  console.log(status);
-  
+
   return (
     <div className="clicker">
       <form className="login" action="" method="POST" onSubmit={authHandler}>

@@ -11,6 +11,7 @@ const GlobalProvider = ({ children }) => {
 
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [alertContent, setAlertContent] = useState('');
+  const [alertData, setAlertData] = useState('');
 
   const [allUsers, setAllUsers] = useState(0);
   const [averageVote, setAverageVote] = useState(0);
@@ -37,6 +38,7 @@ const GlobalProvider = ({ children }) => {
 
     isAlertOpen, setIsAlertOpen,
     alertContent, setAlertContent,
+    alertData, setAlertData,
 
     allUsers, setAllUsers, 
     averageVote, setAverageVote, 

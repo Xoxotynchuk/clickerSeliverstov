@@ -1,36 +1,188 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../store/GlobalContext";
+import { Api } from "../../methods/requests/Api";
 
 const Modal = ({ isOpen, content }) => {
-  const { setIsModalOpen, setModalContent, modalData, setAlertContent, setIsAlertOpen } = useContext(GlobalContext);
+  const {
+    setIsModalOpen,
+    setModalContent,
+    modalData,
+    setAlertContent,
+    setIsAlertOpen,
+  } = useContext(GlobalContext);
+
+  const [selectedCategory, setSelectedCategory] = useState("link");
+  const [name, setName] = useState("");
+  const [image, setImage] = useState(null);
+  const [active, setActive] = useState(1);
+  const [link, setLink] = useState("");
+  const [count, setCount] = useState(1);
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+
+  const nameHandler = (event) => {
+    setName(event.target.value);
+  };
+
+  const imageHandler = (event) => {
+    setImage(event.target.files[0]); // Получаем файл
+  };
+
+  const activeHandler = (event) => {
+    if (event.target.checked) {
+      setActive(1);
+    } else {
+      setActive(0);
+    }
+  };
+
+  const linkHandler = (event) => {
+    setLink(event.target.value);
+  };
+
+  const countHandler = (event) => {
+    setCount(event.target.value);
+  };
+
+  const descriptionHandler = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const priceHandler = (event) => {
+    setPrice(event.target.value);
+  };
+
+  useEffect(() => {
+    const link = document.getElementById("link");
+    const count = document.getElementById("count");
+    if ((link, count)) {
+      if (modalData && modalData.item.type.id == 1) {
+        setSelectedCategory("link");
+        count.classList.add("hidden");
+        link.classList.remove("hidden");
+      } else if (modalData && modalData.item.type.id == 2) {
+        setSelectedCategory("friend");
+        link.classList.add("hidden");
+        count.classList.remove("hidden");
+      }
+    }
+  }, [
+    modalData &&
+      modalData.item &&
+      modalData.item.type.id &&
+      document.getElementById("link") &&
+      document.getElementById("count"),
+  ]);
+
+  useEffect(() => {
+    if (modalData && modalData.item) {
+      setName(modalData.item.name);
+      setImage(null); // Сбросим изображение, если нужно
+      setActive(modalData.item.active);
+      modalData.item.type.id == 1
+        ? setSelectedCategory("link")
+        : setSelectedCategory("friend");
+      setCount(modalData.item.count);
+      setLink(modalData.item.link);
+      setDescription(modalData.item.description);
+      setPrice(modalData.item.price);
+    }
+  }, [modalData]);
+
+  useEffect(() => {
+    const link = document.getElementById("link");
+    const count = document.getElementById("count");
+    if ((link, count)) {
+      if (selectedCategory == "link") {
+        link.classList.remove("hidden");
+        count.classList.add("hidden");
+      } else {
+        count.classList.remove("hidden");
+        link.classList.add("hidden");
+      }
+    }
+  }, [document.getElementById("link") && document.getElementById("count")]);
 
   if (!isOpen) return null;
 
-  const body = document.querySelector('body')
-  body.style.overflow = 'hidden'
+  const handleChange = (event) => {
+    setSelectedCategory(event.target.value);
+    const count = document.getElementById("count");
+    const link = document.getElementById("link");
+
+    if (event.target.value == "link") {
+      link.classList.remove("hidden");
+      count.classList.add("hidden");
+      setCount(1);
+    } else {
+      count.classList.remove("hidden");
+      link.classList.add("hidden");
+      setLink("");
+    }
+  };
+
+  const body = document.querySelector("body");
+  body.style.overflow = "hidden";
 
   const handleOverlayClick = (e) => {
     // Закрываем модалку только если кликнули на оверлей, а не на саму модалку
     if (e.target === e.currentTarget) {
       setIsModalOpen(false);
-      body.style.overflow = 'auto'
+      body.style.overflow = "auto";
     }
   };
 
   const closeModal = () => {
-    body.style.overflow = 'auto'
+    body.style.overflow = "auto";
     setIsModalOpen(false);
     setModalContent("");
   };
 
-  const createTask = async(content) => {
-    setAlertContent(content);
-    setIsAlertOpen(true);
-  }
+  const createTask = async (e) => {
+    e.preventDefault();
+    const data = {
+      name: name,
+      image: image,
+      active: active,
+      category: selectedCategory == "link" ? 1 : 2,
+      link: link,
+      count: count,
+      description: description,
+      price: price,
+    };
+    try {
+      await Api.createTasks(data);
+      setIsModalOpen(false);
+      setModalContent("");
+      setAlertContent("Создание задачи");
+      setIsAlertOpen(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  const editTask = async() => {
+  const editTask = async (id) => {
+    const data = {};
+    data.name = name;
+    if (image != null) data.image = image; // Отправляем изображение только если оно изменилось
+    if (active == true) data.active = 1;
+    if (active == false) data.active = 0;
+    data.category = selectedCategory === "link" ? 1 : 2;
+    data.count = count;
+    data.link = link;
+    data.description = description;
+    data.price = price;
 
-  }
+    try {
+      await Api.editTasks(id, data);
+      setIsModalOpen(false);
+      setModalContent("");
+      setAlertContent("Редактирование задачи");
+      setIsAlertOpen(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
@@ -50,104 +202,210 @@ const Modal = ({ isOpen, content }) => {
           </svg>
         </div>
         {content == "Новая задача" && (
-          <form className="modal-content">
-            <h2 className="form-title">Создание задачи</h2>
+          <form
+            className="modal-content"
+            method="POST"
+            encType="multipart/form-data"
+            onSubmit={(e) => {
+              e.preventDefault(); // Предотвращаем обновление страницы
+            }}
+          >
+            <h2 className="form-title">Новая задачи</h2>
             <div className="form-content">
               <label htmlFor="title" className="modal-label">
                 <h3>Название</h3>
-                <input name="title" type="text" required />
+                <input
+                  name="title"
+                  type="text"
+                  defaultValue=""
+                  onChange={nameHandler}
+                  required
+                />
               </label>
 
               <label htmlFor="image" className="modal-label">
                 <h3>Картинка</h3>
-                <input name="image" type="file" required />
+                <input
+                  name="image"
+                  type="file"
+                  onChange={imageHandler}
+                  required
+                />
               </label>
 
               <label htmlFor="active" className="modal-label">
                 <h3>Активность</h3>
-                <input name="active" type="checkbox" checked />
-              </label>
-
-              <label htmlFor="count" className="modal-label">
-                <h3>Намбер</h3>
-                <input name="count" type="number" defaultValue='1' checked />
-              </label>
-
-              <label htmlFor="text" className="modal-label">
-                <h3>Ссылка</h3>
-                <input name="text" type="text" checked />
-              </label>
-
-              <label htmlFor="description" className="modal-label">
-                <h3>Описание</h3>
-                <input name="description" type="text" required />
-              </label>
-
-              <label htmlFor="price" className="modal-label">
-                <h3>Цена</h3>
-                <input name="price" type="text" required />
+                <input
+                  name="active"
+                  type="checkbox"
+                  onChange={activeHandler}
+                  defaultChecked
+                  required
+                />
               </label>
 
               <label htmlFor="category" className="modal-label">
                 <h3>Категория</h3>
-                <select name="category" required>
-                  <option name="link">Ссылка</option>
-                  <option name="friend">Приглашение друзей</option>
+                <select
+                  name="category"
+                  value={selectedCategory}
+                  onChange={handleChange}
+                  required
+                >
+                  <option name="link" value="link">
+                    Ссылка
+                  </option>
+                  <option name="friend" value="friend">
+                    Приглашение друзей
+                  </option>
                 </select>
               </label>
+
+              <label htmlFor="count" className="modal-label hidden" id="count">
+                <h3>Количество</h3>
+                <input name="count" type="number" onChange={countHandler} />
+              </label>
+
+              <label htmlFor="text" className="modal-label" id="link">
+                <h3>Ссылка</h3>
+                <input
+                  name="text"
+                  type="text"
+                  defaultValue=""
+                  onChange={linkHandler}
+                />
+              </label>
+
+              <label htmlFor="description" className="modal-label">
+                <h3>Описание</h3>
+                <input
+                  name="description"
+                  type="text"
+                  defaultValue=""
+                  onChange={descriptionHandler}
+                  required
+                />
+              </label>
+
+              <label htmlFor="price" className="modal-label">
+                <h3>Цена</h3>
+                <input
+                  name="price"
+                  type="text"
+                  defaultValue=""
+                  onChange={priceHandler}
+                  required
+                />
+              </label>
             </div>
-            <button onClick={()=> createTask('Создание задачи')}>Создать</button>
+            <button onClick={createTask}>Создать</button>
           </form>
         )}
 
         {content == "Редактирование задачи" && (
-          <form className="modal-content">
+          <form
+            className="modal-content"
+            method="POST"
+            encType="multipart/form-data"
+            onSubmit={(e) => {
+              e.preventDefault(); // Предотвращаем обновление страницы
+            }}
+          >
             <h2 className="form-title">Редактирование задачи</h2>
             <div className="form-content">
               <label htmlFor="title" className="modal-label">
                 <h3>Название</h3>
-                <input name="title" type="text" defaultValue={modalData.item.name} required />
+                <input
+                  name="title"
+                  type="text"
+                  defaultValue={modalData.item.name}
+                  onChange={nameHandler}
+                  required
+                />
               </label>
 
               <label htmlFor="image" className="modal-label">
                 <h3>Картинка</h3>
-                <input name="image" type="file" required />
+                <input
+                  name="image"
+                  type="file"
+                  onChange={imageHandler}
+                  required
+                />
               </label>
 
               <label htmlFor="active" className="modal-label">
                 <h3>Активность</h3>
-                <input name="active" type="checkbox" checked />
-              </label>
-
-              <label htmlFor="count" className="modal-label">
-                <h3>Намбер</h3>
-                <input name="count" type="number" defaultValue='1' checked />
-              </label>
-
-              <label htmlFor="text" className="modal-label">
-                <h3>Ссылка</h3>
-                <input name="text" type="text" checked />
-              </label>
-
-              <label htmlFor="description" className="modal-label">
-                <h3>Описание</h3>
-                <input name="description" type="text" defaultValue={modalData.item.description} required />
-              </label>
-
-              <label htmlFor="price" className="modal-label">
-                <h3>Цена</h3>
-                <input name="price" type="text" defaultValue={modalData.item.price} required />
+                <input
+                  name="active"
+                  type="checkbox"
+                  onChange={activeHandler}
+                  defaultChecked={modalData.item.active == 1}
+                />
               </label>
 
               <label htmlFor="category" className="modal-label">
                 <h3>Категория</h3>
-                <select name="category" required>
-                  <option name="link">Ссылка</option>
-                  <option name="friend">Приглашение друзей</option>
+                <select
+                  name="category"
+                  value={selectedCategory}
+                  onChange={handleChange}
+                  required
+                >
+                  <option name="link" value="link">
+                    Ссылка
+                  </option>
+                  <option name="friend" value="friend">
+                    Приглашение друзей
+                  </option>
                 </select>
               </label>
+
+              <label htmlFor="count" className="modal-label" id="count">
+                <h3>Количество</h3>
+                <input
+                  name="count"
+                  type="number"
+                  onChange={countHandler}
+                  defaultValue={modalData.item.count}
+                />
+              </label>
+
+              <label htmlFor="text" className="modal-label" id="link">
+                <h3>Ссылка</h3>
+                <input
+                  name="text"
+                  type="text"
+                  onChange={linkHandler}
+                  defaultValue={modalData.item.link}
+                />
+              </label>
+
+              <label htmlFor="description" className="modal-label">
+                <h3>Описание</h3>
+                <input
+                  name="description"
+                  type="text"
+                  onChange={descriptionHandler}
+                  defaultValue={modalData.item.description}
+                  required
+                />
+              </label>
+
+              <label htmlFor="price" className="modal-label">
+                <h3>Цена</h3>
+                <input
+                  name="price"
+                  type="text"
+                  onChange={priceHandler}
+                  defaultValue={modalData.item.price}
+                  required
+                />
+              </label>
             </div>
-            <button onClick={editTask}>Редактировать</button>
+            <button onClick={() => editTask(modalData.item.id)}>
+              Редактировать
+            </button>
           </form>
         )}
       </div>

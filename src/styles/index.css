@@ -111,6 +111,9 @@ button svg {
   background-color: var(--red-color);
 }
 
+.hidden {
+  display: none !important;
+}
 h1 {
   color: white;
   text-align: center;

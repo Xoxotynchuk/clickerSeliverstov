@@ -6,6 +6,7 @@ function Clicker() {
   const {
     setModalContent,
     setIsModalOpen,
+    isModalOpen,
     setModalData,
     allUsers,
     setAllUsers,
@@ -15,6 +16,10 @@ function Clicker() {
     setTapToday,
     allTasks,
     setAllTasks,
+    setAlertContent,
+    setIsAlertOpen,
+    setAlertData,
+    isAlertOpen
   } = useContext(GlobalContext);
 
   const getStatistic = async () => {
@@ -44,18 +49,15 @@ function Clicker() {
   };
 
   const deleteTask = async (id) => {
-    try {
-      await Api.deleteTasks();
-      alert("Задание удалено");
-    } catch (error) {
-      console.log(error);
-    }
+    setAlertContent("Удаление задачи");
+    setIsAlertOpen(true);
+    setAlertData(id)
   };
 
   useEffect(() => {
     getStatistic();
     getAllTasks();
-  }, []);
+  }, [isModalOpen || isAlertOpen]);
 
   return (
     <div className="clicker">
