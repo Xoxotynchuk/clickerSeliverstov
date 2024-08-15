@@ -53,7 +53,8 @@
   color: white;
 }
 
-.clicker-tasks__item svg, .clicker-tasks__item-icon img {
+.clicker-tasks__item svg,
+.clicker-tasks__item-icon img {
   width: 50px;
   height: auto;
   /* aspect-ratio: 1 / 1;
@@ -109,4 +110,39 @@
   .clicker-tasks__header button {
     max-width: 100%;
   }
+}
+
+.clicker-users {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+}
+
+.clicker-users__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-small);
+}
+
+.clicker-users__item {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-small);
+}
+
+.clicker-users__item svg, .clicker-users__item img {
+  width: 70px;
+  height: auto;
+  padding: 15px;
+  border-radius: 100px;
+  background-color: #658cb5;
+}
+
+.clicker-users__item svg path {
+  fill: white;
+}
+
+.users-item__description {
+  display: flex;
+  flex-direction: column;
 }
