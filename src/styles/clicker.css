@@ -146,3 +146,15 @@
   display: flex;
   flex-direction: column;
 }
+
+@media(max-width: 1150px){
+  .clicker-users__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width: 900px){
+  .clicker-users__list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
