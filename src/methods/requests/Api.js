@@ -99,4 +99,13 @@ export class Api {
     );
     return response;
   }
+
+  // Получение юзеров
+  static async getUsers(page) {
+    const response = await axios.get(
+      this.baseUrl("users/" + page),
+      this.auth()
+    );
+    return response;
+  }
 }

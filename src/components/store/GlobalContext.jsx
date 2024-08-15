@@ -14,6 +14,7 @@ const GlobalProvider = ({ children }) => {
   const [alertData, setAlertData] = useState('');
 
   const [allUsers, setAllUsers] = useState(0);
+  const [allInfoUsers, setAllInfoUsers] = useState([]);
   const [averageVote, setAverageVote] = useState(0);
   const [tapToday, setTapToday] = useState(0);
 
@@ -21,6 +22,8 @@ const GlobalProvider = ({ children }) => {
 
   const [status, setStatus] = useState("");
   const [data, setData] = useState("");
+
+  const [spiner, setSpiner] = useState(true);
 
   const getAccess = async () => {
     const authStatus = await checkAuth(setStatus);
@@ -41,13 +44,16 @@ const GlobalProvider = ({ children }) => {
     alertData, setAlertData,
 
     allUsers, setAllUsers, 
+    allInfoUsers, setAllInfoUsers,
     averageVote, setAverageVote, 
     tapToday, setTapToday,
 
     allTasks, setAllTasks,
 
     status, setStatus,
-    data, setData
+    data, setData,
+
+    spiner, setSpiner,
   }}>
       {children}
     </GlobalContext.Provider>;
