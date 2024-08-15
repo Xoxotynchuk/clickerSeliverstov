@@ -83,22 +83,13 @@ export class Api {
   }
 
   // Активировать задание
-  static async setTaskActive(id) {
-    const response = await axios.get(
-      this.baseUrl("admin/tasks/active/" + id),
-      this.auth()
-    );
-    return response;
-  }
-
-  // Деактивировать задание
-  static async setTaskActive(id) {
-    const response = await axios.get(
-      this.baseUrl("admin/tasks/deactive/" + id),
-      this.auth()
-    );
-    return response;
-  }
+  // static async setTaskActive(id) {
+  //   const response = await axios.get(
+  //     this.baseUrl("admin/tasks/active/" + id),
+  //     this.auth()
+  //   );
+  //   return response;
+  // }
 
   // Получение юзеров
   static async getUsers(page) {

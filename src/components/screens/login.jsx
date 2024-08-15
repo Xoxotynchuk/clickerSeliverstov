@@ -1,13 +1,12 @@
 import { useContext, useState } from "react";
 import { GlobalContext } from "../store/GlobalContext";
 import { loginRequest } from "../../methods/requests/login";
-import { Api } from "../../methods/requests/Api";
 
 function Login() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  const { status,setStatus } = useContext(GlobalContext);
+  const { setStatus } = useContext(GlobalContext);
 
   const loginHandler = (event) => {
     setLogin(event.target.value);

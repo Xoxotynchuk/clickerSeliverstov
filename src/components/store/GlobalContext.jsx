@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import checkAuth from "../../methods/requests/checkAuth";
 import { getCookie } from "../../methods/getCookie";
 const GlobalContext = React.createContext();
 
@@ -25,14 +24,10 @@ const GlobalProvider = ({ children }) => {
 
   const [spiner, setSpiner] = useState(true);
 
-  const getAccess = async () => {
-    const authStatus = await checkAuth(setStatus);
-  };
-
   useEffect(()=> {
     getCookie("currentToken") ? setStatus(200) : setStatus('')
 
-  })
+  },[])
 
   return <GlobalContext.Provider value={{
     isModalOpen, setIsModalOpen,
