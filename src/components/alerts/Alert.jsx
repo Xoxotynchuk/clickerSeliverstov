@@ -26,23 +26,23 @@ const Alert = ({ isOpen, content }) => {
     isAlertOpen &&
       document.querySelector(".alert").classList.add("alert_active");
     setTimeout(closeAlert, 10000);
-  }, [isAlertOpen == true]);
+  }, [isAlertOpen === true]);
 
   return (
     <div className="alert">
-      {content == "Создание задачи" && (
+      {content === "Создание задачи" && (
         <div className="alert-content">
           <h2>Задача добавлена</h2>
           <p>Задача успешного добавлена</p>
         </div>
       )}
-      {content == "Редактирование задачи" && (
+      {content === "Редактирование задачи" && (
         <div className="alert-content">
           <h2>Задача отредактирована</h2>
           <p>Задача успешного отредактирована</p>
         </div>
       )}
-      {content == "Удаление задачи" && (
+      {content === "Удаление задачи" && (
         <div className="alert-content">
           <h2>Вы действительно хотите удалить задачу?</h2>
           <div className="alert-buttons">
@@ -51,7 +51,7 @@ const Alert = ({ isOpen, content }) => {
           </div>
         </div>
       )}
-      {content == "Успешное удаление задачи" && (
+      {content === "Успешное удаление задачи" && (
         <div className="alert-content">
           <h2>Задача удалена</h2>
           <p>Задача успешного удалена</p>

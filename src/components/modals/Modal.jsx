@@ -56,11 +56,11 @@ const Modal = ({ isOpen, content }) => {
     const link = document.getElementById("link");
     const count = document.getElementById("count");
     if ((link, count)) {
-      if (modalData && modalData.item.type.id == 1) {
+      if (modalData && modalData.item.type.id === 1) {
         setSelectedCategory("link");
         count.classList.add("hidden");
         link.classList.remove("hidden");
-      } else if (modalData && modalData.item.type.id == 2) {
+      } else if (modalData && modalData.item.type.id === 2) {
         setSelectedCategory("friend");
         link.classList.add("hidden");
         count.classList.remove("hidden");
@@ -79,7 +79,7 @@ const Modal = ({ isOpen, content }) => {
       setName(modalData.item.name);
       setImage(null); // Сбросим изображение, если нужно
       setActive(modalData.item.active);
-      modalData.item.type.id == 1
+      modalData.item.type.id === 1
         ? setSelectedCategory("link")
         : setSelectedCategory("friend");
       setCount(modalData.item.count);
@@ -93,7 +93,7 @@ const Modal = ({ isOpen, content }) => {
     const link = document.getElementById("link");
     const count = document.getElementById("count");
     if ((link, count)) {
-      if (selectedCategory == "link") {
+      if (selectedCategory === "link") {
         link.classList.remove("hidden");
         count.classList.add("hidden");
       } else {
@@ -144,7 +144,7 @@ const Modal = ({ isOpen, content }) => {
       name: name,
       image: image,
       active: active,
-      category: selectedCategory == "link" ? 1 : 2,
+      category: selectedCategory === "link" ? 1 : 2,
       link: link,
       count: count,
       description: description,
@@ -165,8 +165,8 @@ const Modal = ({ isOpen, content }) => {
     const data = {};
     data.name = name;
     if (image != null) data.image = image; // Отправляем изображение только если оно изменилось
-    if (active == true) data.active = 1;
-    if (active == false) data.active = 0;
+    if (active === true) data.active = 1;
+    if (active === false) data.active = 0;
     data.category = selectedCategory === "link" ? 1 : 2;
     data.count = count;
     data.link = link;
@@ -302,7 +302,7 @@ const Modal = ({ isOpen, content }) => {
           </form>
         )}
 
-        {content == "Редактирование задачи" && (
+        {content === "Редактирование задачи" && (
           <form
             className="modal-content"
             method="POST"
@@ -340,7 +340,7 @@ const Modal = ({ isOpen, content }) => {
                   name="active"
                   type="checkbox"
                   onChange={activeHandler}
-                  defaultChecked={modalData.item.active == 1}
+                  defaultChecked={modalData.item.active === 1}
                 />
               </label>
 

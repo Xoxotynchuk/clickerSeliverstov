@@ -16,7 +16,7 @@ const Container = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        {status && status == 200 ? (
+        {status && status === 200 ? (
           <Routes>
             <Route path="/" element={<Clicker />} />
             <Route path="*" element={<PageNotFound />} />
