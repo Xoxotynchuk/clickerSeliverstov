@@ -5,7 +5,7 @@ export class Api {
   static auth() {
     return {
       headers: {
-        Authorization: "Bearer " + getCookie("currentToken"),
+        Authorization: "Bearer " + getCookie("clickerToken"),
       },
     };
   }
@@ -82,19 +82,19 @@ export class Api {
     return response;
   }
 
-  // Активировать задание
-  // static async setTaskActive(id) {
-  //   const response = await axios.get(
-  //     this.baseUrl("admin/tasks/active/" + id),
-  //     this.auth()
-  //   );
-  //   return response;
-  // }
-
   // Получение юзеров
   static async getUsers(page) {
     const response = await axios.get(
       this.baseUrl("users/" + page),
+      this.auth()
+    );
+    return response;
+  }
+
+  // Получение utm меток
+  static async getUtm() {
+    const response = await axios.get(
+      this.baseUrl("utms"),
       this.auth()
     );
     return response;

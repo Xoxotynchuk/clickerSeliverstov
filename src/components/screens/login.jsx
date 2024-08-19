@@ -23,7 +23,7 @@ function Login() {
       const response = await loginRequest(login, password);  
       setStatus(response.data.data.status)
       document.cookie =
-        "currentToken=" + response.data.data + "; max-age=15638400";
+        "clickerToken=" + response.data.data + "; max-age=15638400";
       localStorage.setItem(login, response.data.data);
       window.location.reload();
     } catch (err) {

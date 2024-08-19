@@ -19,14 +19,15 @@ const GlobalProvider = ({ children }) => {
 
   const [allTasks, setAllTasks] = useState([]);
 
+  const [allUtm, setAllUtm] = useState([]);
+
   const [status, setStatus] = useState("");
   const [data, setData] = useState("");
 
   const [spiner, setSpiner] = useState(true);
 
   useEffect(()=> {
-    getCookie("currentToken") ? setStatus(200) : setStatus('')
-
+    getCookie("clickerToken") ? setStatus(200) : setStatus('')
   },[])
 
   return <GlobalContext.Provider value={{
@@ -44,6 +45,8 @@ const GlobalProvider = ({ children }) => {
     tapToday, setTapToday,
 
     allTasks, setAllTasks,
+    
+    allUtm, setAllUtm,
 
     status, setStatus,
     data, setData,

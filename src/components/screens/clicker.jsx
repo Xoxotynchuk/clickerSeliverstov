@@ -24,6 +24,8 @@ function Clicker() {
     isAlertOpen,
     spiner,
     setSpiner,
+    allUtm,
+    setAllUtm,
   } = useContext(GlobalContext);
 
   const [page, setPage] = useState(1);
@@ -50,6 +52,18 @@ function Clicker() {
       console.log(error);
     }
     setSpiner(false);
+  };
+
+
+  const getUtm = async () => {
+    setSpiner(true);
+    try {
+      const response = await Api.getUtm();
+      setAllUtm(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+    // setSpiner(false);
   };
 
   const handleNextPage = () => {
@@ -89,10 +103,14 @@ function Clicker() {
     getStatistic();
     getAllTasks();
   }, [isModalOpen, isAlertOpen]);
-  
-  useEffect(()=> {
+
+  useEffect(() => {
     getAllInfoUsers();
-  }, [page])
+  }, [page]);
+  useEffect(() => {
+    getUtm();
+  }, []);
+
   return (
     <div className="clicker">
       <h1>Админ панель</h1>
@@ -228,13 +246,59 @@ function Clicker() {
                     </div>
                   </div>
                 ))
-              : "asd"}
+              : ""}
+          </div>
+        )}
+      </div>
+      <div className="clicker-utm">
+        <h2>Utm метки</h2>
+        {Object.keys(allUtm).length === 0 && spiner ? (
+          <div className="skeleton-table__list">
+            <div className="skeleton-table-item clicker-component">
+              <div className="block pulsate block-img"></div>
+              <div className="skeleton-table__text">
+                <div className="block pulsate"></div>
+                <div className="skeleton-table__description">
+                  <div className="block pulsate"></div>
+                  <div className="block pulsate"></div>
+                </div>
+              </div>
+            </div>
+            <div className="skeleton-table-item clicker-component">
+              <div className="block pulsate block-img"></div>
+              <div className="skeleton-table__text">
+                <div className="block pulsate"></div>
+                <div className="skeleton-table__description">
+                  <div className="block pulsate"></div>
+                  <div className="block pulsate"></div>
+                </div>
+              </div>
+            </div>
+            <div className="skeleton-table-item clicker-component">
+              <div className="block pulsate block-img"></div>
+              <div className="skeleton-table__text">
+                <div className="block pulsate"></div>
+                <div className="skeleton-table__description">
+                  <div className="block pulsate"></div>
+                  <div className="block pulsate"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="clicker-items">
+          {allUtm ? allUtm && allUtm.map((item)=> (
+            <div key={item.id} className="clicker-component">
+              <h3>Название: {item.source}</h3>
+              <p>Количество: {item.total}</p>
+            </div>
+            )): ""}
           </div>
         )}
       </div>
       <div className="clicker-users">
         <h2>Пользователи</h2>
-        {allInfoUsers && spiner ? (
+        {Object.keys(allInfoUsers).length === 0 && spiner ? (
           <div className="skeleton-table__list">
             <div className="skeleton-table-item clicker-component">
               <div className="block pulsate block-img"></div>

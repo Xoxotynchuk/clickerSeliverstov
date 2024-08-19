@@ -12,7 +12,7 @@ import PageNotFound from "./screens/PageNotFound";
 const Container = () => {
   const { isModalOpen, modalContent, isAlertOpen, alertContent, status } =
     useContext(GlobalContext);
-    
+    console.log(status);
   return (
     <div className="App">
       <BrowserRouter>
